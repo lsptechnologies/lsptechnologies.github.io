@@ -1,127 +1,423 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <title>LSP Technologies Inc.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="LSP Technologies Inc. - Automation, Engineering and Smart Technology Solutions.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LSP Technologies Inc. — Building Tomorrow's Platforms</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy: { DEFAULT: '#0D1B3E', mid: '#1E3A8A', light: '#2D4FAA' },
+          brand: { red: '#C8102E', teal: '#14B8A6', gold: '#C9A84C' },
+        },
+        fontFamily: {
+          display: ['"Cormorant Garamond"', 'serif'],
+          body: ['"DM Sans"', 'sans-serif'],
+        },
+        animation: {
+          'grid-shift': 'gridShift 20s linear infinite',
+          'scroll-line': 'scrollLine 2s ease-in-out infinite',
+          'fade-up': 'fadeUp 0.8s ease forwards',
+          'fade-in': 'fadeIn 1.2s ease forwards',
+        },
+        keyframes: {
+          gridShift: { '0%': { transform: 'translateY(0)' }, '100%': { transform: 'translateY(60px)' } },
+          scrollLine: { '0%': { left: '-100%' }, '100%': { left: '100%' } },
+          fadeUp: { 'from': { opacity: '0', transform: 'translateY(28px)' }, 'to': { opacity: '1', transform: 'translateY(0)' } },
+          fadeIn: { 'from': { opacity: '0' }, 'to': { opacity: '1' } },
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body { font-family: 'DM Sans', sans-serif; }
+  .font-display { font-family: 'Cormorant Garamond', serif; }
+  
+  .grid-bg {
+    background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridShift 20s linear infinite;
+  }
+  
+  @keyframes gridShift {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(60px); }
+  }
 
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+
+
+  .hero-anim { animation: fadeUp 1.1s ease forwards; }
+  .hero-anim-delay { animation: fadeUp 1.1s ease 0.4s forwards; opacity: 0; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pillar-bar::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: #14B8A6;
+    transform: scaleY(0);
+    transition: transform 0.35s ease;
+    transform-origin: bottom;
+  }
+  .pillar-bar:hover::before { transform: scaleY(1); }
+
+  .scroll-line-anim {
+    position: relative;
+    overflow: hidden;
+  }
+  .scroll-line-anim::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #14B8A6;
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+  @keyframes scrollLine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+
+  .platform-card { transition: background 0.35s ease; }
+  .platform-card:hover { background: rgba(20,184,166,0.04); }
+
+  input, textarea, select {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #FAFAF8;
+    outline: none;
+    transition: border-color 0.3s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  input:focus, textarea:focus, select:focus { border-color: #14B8A6; }
+  select option { background: #0D1B3E; }
+  ::placeholder { color: rgba(255,255,255,0.25); }
+</style>
 </head>
+<body class="bg-navy text-white overflow-x-hidden">
 
-<body class="bg-gray-950 text-gray-200 font-sans">
+<!-- ── NAV ── -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-16 py-5 flex justify-between items-center bg-navy/85 backdrop-blur-lg border-b border-white/[0.06] transition-all duration-300">
+  <div class="flex items-center -gap-2">
+    <img src="./assets/logo.png" alt="LSP Technologies" class="h-16 w-auto object-contain">
+    <div class="flex flex-col leading-none">
+      <span class="font-display text-lg font-semibold tracking-[2px] text-white">LSP TECHNOLOGIES</span>
+      <span class="text-[9px] tracking-[3px] uppercase text-brand-teal mt-0.5">Inc. — Platform Ventures</span>
+    </div>
+  </div>
+  <ul class="flex gap-10 list-none">
+    <li><a href="#about" class="text-white/60 text-[13px] tracking-widest uppercase hover:text-brand-teal transition-colors font-medium">About</a></li>
+    <li><a href="#platforms" class="text-white/60 text-[13px] tracking-widest uppercase hover:text-brand-teal transition-colors font-medium">Platforms</a></li>
+    <li><a href="#contact" class="text-white/60 text-[13px] tracking-widest uppercase hover:text-brand-teal transition-colors font-medium">Contact</a></li>
+  </ul>
+  <a href="#contact" class="px-6 py-2.5 border border-brand-teal text-brand-teal text-[12px] tracking-[2px] uppercase hover:bg-brand-teal hover:text-navy transition-all duration-300 font-medium">
+    Investor Inquiry
+  </a>
+</nav>
 
-    <!-- Navigation -->
-    <nav class="bg-gray-900 border-b border-gray-800">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <img src="assets/logo.png"
-                     alt="LSP Technologies Logo"
-                     class="h-10 w-auto object-contain">
-                <span class="text-xl font-semibold text-white">
-                    LSP Technologies Inc.
-                </span>
-            </div>
-            <div class="space-x-6 text-sm">
-                <a href="#about" class="hover:text-blue-400">About</a>
-                <a href="#services" class="hover:text-blue-400">Services</a>
-                <a href="#contact" class="hover:text-blue-400">Contact</a>
-            </div>
+<!-- ── HERO ── -->
+<section class="relative min-h-screen flex items-center px-16 pt-28 pb-20 overflow-hidden" id="hero">
+  <!-- Radial glows -->
+  <div class="absolute inset-0">
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse 60% 60% at 70% 50%, rgba(30,58,138,0.45) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 15% 80%, rgba(200,16,46,0.18) 0%, transparent 60%), radial-gradient(ellipse 30% 30% at 85% 15%, rgba(20,184,166,0.12) 0%, transparent 60%);"></div>
+    <div class="absolute inset-0 grid-bg opacity-100"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-2xl hero-anim">
+    <div class="flex items-center gap-3 mb-7">
+      <div class="w-10 h-px bg-brand-teal"></div>
+      <span class="text-[11px] tracking-[3px] uppercase text-brand-teal font-medium">LSP Technologies Inc. — Kitchener, Canada</span>
+    </div>
+
+    <h1 class="font-display text-[clamp(52px,7vw,88px)] font-light leading-[1.05] mb-7 text-white">
+      Building the<br>
+      <em class="text-brand-teal not-italic">platforms</em> that<br>
+      <strong class="font-bold block">connect people.</strong>
+    </h1>
+
+    <p class="text-[17px] leading-relaxed text-white/60 max-w-xl mb-12 font-light">
+      A Canadian technology venture studio developing scalable marketplace platforms that bridge the gap between local service providers and the people who need them — built for real communities, built for real impact.
+    </p>
+
+    <div class="flex gap-5 items-center">
+      <a href="#platforms" class="px-9 py-4 bg-brand-red text-white text-[13px] tracking-[2px] uppercase font-medium hover:bg-red-800 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(200,16,46,0.35)] transition-all duration-300">
+        Our Platforms
+      </a>
+      <a href="#about" class="px-9 py-4 border border-white/30 text-white text-[13px] tracking-[2px] uppercase font-medium hover:border-white hover:bg-white/5 transition-all duration-300">
+        Learn More
+      </a>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="absolute right-16 bottom-20 flex flex-col gap-8 hero-anim-delay">
+    <div class="text-right border-r-2 border-brand-teal pr-5">
+      <div class="font-display text-5xl font-light text-white leading-none">1</div>
+      <div class="text-[11px] tracking-[2px] uppercase text-white/45 mt-1">Active Platform</div>
+    </div>
+    <div class="text-right border-r-2 border-brand-teal pr-5">
+      <div class="font-display text-5xl font-light text-white leading-none">CA</div>
+      <div class="text-[11px] tracking-[2px] uppercase text-white/45 mt-1">Federal Corp.</div>
+    </div>
+    <div class="text-right border-r-2 border-brand-teal pr-5">
+      <div class="font-display text-5xl font-light text-white leading-none">∞</div>
+      <div class="text-[11px] tracking-[2px] uppercase text-white/45 mt-1">Potential</div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-10 left-16 flex items-center gap-3 text-white/35 text-[11px] tracking-[2px] uppercase">
+    <div class="w-10 h-px bg-white/20 scroll-line-anim"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section class="px-16 py-32 bg-white/[0.02] border-t border-b border-white/[0.06]" id="about">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="w-8 h-px bg-brand-teal"></div>
+    <span class="text-[11px] tracking-[3px] uppercase text-brand-teal font-medium">Who We Are</span>
+  </div>
+  <h2 class="font-display text-[clamp(36px,5vw,60px)] font-light leading-[1.1] mb-16 text-white">
+    Quietly building<br><em class="text-brand-teal">category-defining</em> platforms.
+  </h2>
+
+  <div class="grid grid-cols-2 gap-20 items-start">
+    <!-- Left: text -->
+    <div class="">
+      <p class="text-[16px] leading-[1.8] text-white/60 mb-6 font-light">
+        <strong class="text-white font-medium">LSP Technologies Inc.</strong> is a federally incorporated Canadian technology company dedicated to identifying underserved markets and building elegant, scalable platform solutions that connect people with services — when they need them.
+      </p>
+      <p class="text-[16px] leading-[1.8] text-white/60 mb-6 font-light">
+        Founded in Kitchener, Ontario, we operate with a disciplined venture philosophy: validate first, build second, scale with intent. Our platforms are designed for the Canadian market, with the architecture and ambition to expand across North America.
+      </p>
+      <p class="text-[16px] leading-[1.8] text-white/60 mb-8 font-light">
+        We believe the most powerful technology is invisible — the kind that just <em>works</em>, seamlessly connecting communities and creating real economic opportunity for independent service providers.
+      </p>
+      <div class="inline-flex items-center gap-3 px-5 py-3 border border-brand-red/40 bg-brand-red/[0.06]">
+        <span class="text-xl">🍁</span>
+        <span class="text-[13px] text-white/65 tracking-[0.5px]">Proudly incorporated under the Canada Business Corporations Act (CBCA)</span>
+      </div>
+    </div>
+
+    <!-- Right: pillars -->
+    <div class="flex flex-col gap-6">
+      <div class="pillar-bar relative p-7 border border-white/[0.07] bg-white/[0.02] hover:bg-brand-teal/[0.04] transition-colors duration-300 pl-8">
+        <h4 class="font-display text-xl font-semibold mb-2 text-white">Marketplace First</h4>
+        <p class="text-[14px] leading-[1.7] text-white/50">We build two-sided platforms that create genuine value for both providers and customers alike.</p>
+      </div>
+      <div class="pillar-bar relative p-7 border border-white/[0.07] bg-white/[0.02] hover:bg-brand-teal/[0.04] transition-colors duration-300 pl-8">
+        <h4 class="font-display text-xl font-semibold mb-2 text-white">Validate Before Scale</h4>
+        <p class="text-[14px] leading-[1.7] text-white/50">Every platform begins with a disciplined 90-day real-world experiment before a single dollar of scale is committed.</p>
+      </div>
+      <div class="pillar-bar relative p-7 border border-white/[0.07] bg-white/[0.02] hover:bg-brand-teal/[0.04] transition-colors duration-300 pl-8">
+        <h4 class="font-display text-xl font-semibold mb-2 text-white">Built for Canada</h4>
+        <p class="text-[14px] leading-[1.7] text-white/50">Designed for Canadian communities first, with the architecture to expand into the broader North American market.</p>
+      </div>
+      <div class="pillar-bar relative p-7 border border-white/[0.07] bg-white/[0.02] hover:bg-brand-teal/[0.04] transition-colors duration-300 pl-8">
+        <h4 class="font-display text-xl font-semibold mb-2 text-white">Independent Contractor Model</h4>
+        <p class="text-[14px] leading-[1.7] text-white/50">Our platforms empower independent service providers — not employees — creating flexible economic opportunity at scale.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PLATFORMS ── -->
+<section class="px-16 py-32 bg-navy" id="platforms">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="w-8 h-px bg-brand-teal"></div>
+    <span class="text-[11px] tracking-[3px] uppercase text-brand-teal font-medium">Our Portfolio</span>
+  </div>
+  <h2 class="font-display text-[clamp(36px,5vw,60px)] font-light leading-[1.1] mb-16 text-white">
+    Platforms we're<br><em class="text-brand-teal">building & launching.</em>
+  </h2>
+
+  <div class="grid grid-cols-3 gap-px bg-white/[0.06]">
+    <!-- OnCallNow — LIVE -->
+    <div class="platform-card bg-navy p-12 relative border-t-[3px] border-brand-teal overflow-hidden">
+      <span class="absolute top-12 right-10 font-display text-[64px] font-light text-white/[0.04] leading-none select-none">01</span>
+      <span class="inline-block px-3 py-1 text-[10px] tracking-[2px] uppercase font-semibold bg-brand-teal/15 text-brand-teal border border-brand-teal/30 mb-6">Live — MVP Phase</span>
+      <div class="h-16 flex items-center mb-6">
+        <img src="./assets/oncall.png" alt="OnCallNow" class="h-24 w-auto object-contain">
+      </div>
+      <h3 class="font-display text-2xl font-semibold text-white mb-3">OnCallNow</h3>
+      <p class="text-[14px] leading-[1.75] text-white/50 mb-7 font-light">Real-time local service dispatch connecting customers with available independent home service providers — starting with emergency plumbing in Kitchener, Ontario.</p>
+      <div class="flex flex-wrap gap-2">
+        <span class="px-3 py-1 text-[11px] border border-white/10 text-white/40 tracking-wide">Home Services</span>
+        <span class="px-3 py-1 text-[11px] border border-white/10 text-white/40 tracking-wide">Real-Time Dispatch</span>
+        <span class="px-3 py-1 text-[11px] border border-white/10 text-white/40 tracking-wide">Kitchener, ON</span>
+      </div>
+    </div>
+
+    <!-- Platform 02 -->
+    <div class="platform-card bg-navy p-12 relative border-t-[3px] border-white/10 overflow-hidden">
+      <span class="absolute top-12 right-10 font-display text-[64px] font-light text-white/[0.04] leading-none select-none">02</span>
+      <span class="inline-block px-3 py-1 text-[10px] tracking-[2px] uppercase font-semibold bg-white/5 text-white/35 border border-white/10 mb-6">Coming Soon</span>
+      <div class="h-16 flex items-center mb-6">
+        <span class="font-display text-3xl font-semibold text-white/15 tracking-widest">TBD</span>
+      </div>
+      <h3 class="font-display text-2xl font-semibold text-white mb-3">Next Platform</h3>
+      <p class="text-[14px] leading-[1.75] text-white/50 mb-7 font-light">Our next marketplace venture is in active research. We identify high-friction, underserved service categories and build elegant dispatch solutions around them.</p>
+      <div class="flex flex-wrap gap-2">
+        <span class="px-3 py-1 text-[11px] border border-white/10 text-white/40 tracking-wide">In Research</span>
+        <span class="px-3 py-1 text-[11px] border border-white/10 text-white/40 tracking-wide">2026</span>
+      </div>
+    </div>
+
+    <!-- Platform 03 -->
+    <div class="platform-card bg-navy p-12 relative border-t-[3px] border-white/10 overflow-hidden">
+      <span class="absolute top-12 right-10 font-display text-[64px] font-light text-white/[0.04] leading-none select-none">03</span>
+      <span class="inline-block px-3 py-1 text-[10px] tracking-[2px] uppercase font-semibold bg-white/5 text-white/35 border border-white/10 mb-6">Future</span>
+      <div class="h-16 flex items-center mb-6">
+        <span class="font-display text-3xl font-semibold text-white/15 tracking-widest">TBD</span>
+      </div>
+      <h3 class="font-display text-2xl font-semibold text-white mb-3">Future Ventures</h3>
+      <p class="text-[14px] leading-[1.75] text-white/50 mb-7 font-light">As OnCallNow proves traction, we deploy capital and engineering resources into adjacent marketplace verticals across Canada and North America.</p>
+      <div class="flex flex-wrap gap-2">
+        <span class="px-3 py-1 text-[11px] border border-white/10 text-white/40 tracking-wide">Multi-Vertical</span>
+        <span class="px-3 py-1 text-[11px] border border-white/10 text-white/40 tracking-wide">North America</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="px-16 py-32 bg-white/[0.02] border-t border-white/[0.06]" id="contact">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="w-8 h-px bg-brand-teal"></div>
+    <span class="text-[11px] tracking-[3px] uppercase text-brand-teal font-medium">Get In Touch</span>
+  </div>
+  <h2 class="font-display text-[clamp(36px,5vw,60px)] font-light leading-[1.1] mb-16 text-white">
+    Partner with us.<br><em class="text-brand-teal">Invest. Collaborate. Build.</em>
+  </h2>
+
+  <div class="grid grid-cols-2 gap-20 items-start">
+    <!-- Left -->
+    <div class="">
+      <h3 class="font-display text-2xl font-light text-white/55 mb-10 leading-[1.55]">
+        "We are building the infrastructure for the on-demand local service economy in Canada."
+      </h3>
+      <div class="space-y-7">
+        <div>
+          <div class="text-[10px] tracking-[3px] uppercase text-brand-teal mb-1.5">Company</div>
+          <div class="text-[15px] text-white/70 font-light">LSP Technologies Inc.</div>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="text-center py-24 px-6 bg-gradient-to-b from-gray-900 to-gray-950">
-        <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
-            Engineering Intelligent Systems
-        </h2>
-        <p class="max-w-2xl mx-auto text-gray-400 text-lg">
-            LSP Technologies Inc. delivers innovative automation, control systems, and
-            smart technology solutions designed for modern industry.
-        </p>
-        <a href="#contact"
-           class="mt-8 inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition">
-           Get In Touch
-        </a>
-    </section>
-
-    <!-- About -->
-    <section id="about" class="py-20 px-6 max-w-5xl mx-auto text-center">
-        <h3 class="text-3xl font-semibold text-white mb-6">About Us</h3>
-        <p class="text-gray-400 leading-relaxed">
-            LSP Technologies Inc. specializes in automation engineering,
-            control system design, and intelligent system integration.
-            We help businesses improve operational efficiency, reliability,
-            and scalability through modern engineering solutions.
-        </p>
-    </section>
-
-    <!-- Services -->
-    <section id="services" class="py-20 bg-gray-900 px-6">
-        <div class="max-w-6xl mx-auto">
-            <h3 class="text-3xl font-semibold text-center text-white mb-12">
-                Our Services
-            </h3>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-
-                <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 hover:border-blue-500 transition">
-                    <h4 class="text-xl font-semibold text-white mb-3">
-                        Automation Systems
-                    </h4>
-                    <p class="text-gray-400 text-sm">
-                        Industrial automation design and integration for optimized production systems.
-                    </p>
-                </div>
-
-                <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 hover:border-blue-500 transition">
-                    <h4 class="text-xl font-semibold text-white mb-3">
-                        Control Engineering
-                    </h4>
-                    <p class="text-gray-400 text-sm">
-                        PLC programming, control logic development, and process optimization.
-                    </p>
-                </div>
-
-                <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 hover:border-blue-500 transition">
-                    <h4 class="text-xl font-semibold text-white mb-3">
-                        Software Solutions
-                    </h4>
-                    <p class="text-gray-400 text-sm">
-                        Custom software and system tools to enhance operational efficiency.
-                    </p>
-                </div>
-
-                <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 hover:border-blue-500 transition">
-                    <h4 class="text-xl font-semibold text-white mb-3">
-                        Technical Consulting
-                    </h4>
-                    <p class="text-gray-400 text-sm">
-                        Professional advisory services for engineering and technology projects.
-                    </p>
-                </div>
-
-            </div>
+        <div>
+          <div class="text-[10px] tracking-[3px] uppercase text-brand-teal mb-1.5">Jurisdiction</div>
+          <div class="text-[15px] text-white/70 font-light">Federal Corporation — Canada (CBCA)</div>
         </div>
-    </section>
+        <div>
+          <div class="text-[10px] tracking-[3px] uppercase text-brand-teal mb-1.5">Headquarters</div>
+          <div class="text-[15px] text-white/70 font-light">Kitchener, Ontario, Canada</div>
+        </div>
+        <div>
+          <div class="text-[10px] tracking-[3px] uppercase text-brand-teal mb-1.5">Operating Platform</div>
+          <div class="text-[15px] text-white/70 font-light">OnCallNow — oncallnow.ca</div>
+        </div>
+        <div>
+          <div class="text-[10px] tracking-[3px] uppercase text-brand-teal mb-1.5">Inquiries</div>
+          <div class="text-[15px] text-white/70 font-light"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="177f727b7b78577b64676372747f79787b78707e7264397476">[email&#160;protected]</a></div>
+        </div>
+      </div>
+    </div>
 
-    <!-- Contact -->
-    <section id="contact" class="py-20 px-6 text-center">
-        <h3 class="text-3xl font-semibold text-white mb-6">Contact Us</h3>
-        <p class="text-gray-400 mb-6">
-            Kitchener, Ontario, Canada
-        </p>
-        <a href="mailto:info@lsptech.ca"
-           class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition">
-           info@lsptech.ca
-        </a>
-    </section>
+    <!-- Right: form -->
+    <div class="flex flex-col gap-5">
+      <div class="grid grid-cols-2 gap-4">
+        <div class="flex flex-col gap-2">
+          <label class="text-[10px] tracking-[2px] uppercase text-white/45">First Name</label>
+          <input type="text" placeholder="John" class="px-4 py-3.5 text-[14px]">
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-[10px] tracking-[2px] uppercase text-white/45">Last Name</label>
+          <input type="text" placeholder="Smith" class="px-4 py-3.5 text-[14px]">
+        </div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <label class="text-[10px] tracking-[2px] uppercase text-white/45">Email Address</label>
+        <input type="email" placeholder="john@company.com" class="px-4 py-3.5 text-[14px]">
+      </div>
+      <div class="flex flex-col gap-2">
+        <label class="text-[10px] tracking-[2px] uppercase text-white/45">Inquiry Type</label>
+        <select class="px-4 py-3.5 text-[14px] text-white/60">
+          <option value="">Select purpose</option>
+          <option>Investor Inquiry</option>
+          <option>Partnership Opportunity</option>
+          <option>Service Provider Interest</option>
+          <option>Media & Press</option>
+          <option>General Inquiry</option>
+        </select>
+      </div>
+      <div class="flex flex-col gap-2">
+        <label class="text-[10px] tracking-[2px] uppercase text-white/45">Message</label>
+        <textarea placeholder="Tell us about your interest in LSP Technologies..." class="px-4 py-3.5 text-[14px] min-h-[120px] resize-y"></textarea>
+      </div>
+      <button class="self-start px-9 py-4 bg-brand-red text-white text-[13px] tracking-[2px] uppercase font-medium hover:bg-red-800 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(200,16,46,0.35)] transition-all duration-300">
+        Send Inquiry
+      </button>
+    </div>
+  </div>
+</section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 border-t border-gray-800 text-center py-6 text-gray-500 text-sm">
-        © 2026 LSP Technologies Inc. All Rights Reserved.
-    </footer>
+<!-- ── FOOTER ── -->
+<footer class="px-16 py-12 border-t border-white/[0.06] flex justify-between items-center">
+  <div class="flex items-center gap-1">
+    <img src="./assets/logo.png" alt="LSP Technologies" class="h-12 w-auto object-contain">
+    <div>
+      <div class="font-display text-[18px] font-semibold tracking-[3px] text-white">LSP TECHNOLOGIES</div>
+      <div class="text-[10px] tracking-[3px] uppercase text-white/30 mt-1">Inc. — Federally Incorporated in Canada</div>
+    </div>
+  </div>
+  <div class="text-center text-[11px] text-white/30 leading-[1.85] tracking-[0.3px]">
+    © 2026 LSP Technologies Inc. All rights reserved.<br>
+    OnCallNow is a product of LSP Technologies Inc.<br>
+    <span class="text-[10px] text-white/20">LSP Technologies Inc. ("OnCallNow") operates a technology platform that connects customers with independent service providers.</span>
+  </div>
+  <div class="flex flex-col items-end gap-3">
+    <span class="text-2xl">🍁</span>
+    <div class="flex gap-6">
+      <a href="#" class="text-[11px] text-white/35 hover:text-brand-teal tracking-[1px] uppercase transition-colors">Privacy</a>
+      <a href="#" class="text-[11px] text-white/35 hover:text-brand-teal tracking-[1px] uppercase transition-colors">Terms</a>
+      <a href="#" class="text-[11px] text-white/35 hover:text-brand-teal tracking-[1px] uppercase transition-colors">Legal</a>
+    </div>
+  </div>
+</footer>
 
-</body>
-</html>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 120);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+  
+  document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+  
+  // Immediately reveal anything already in viewport on load
+  setTimeout(() => {
+    document.querySelectorAll('.scroll-reveal').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        el.classList.add('visible');
+      }
+    });
+  }, 100);
+
+  // Shrink nav on scroll
+  
